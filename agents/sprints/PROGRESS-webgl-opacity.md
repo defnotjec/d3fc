@@ -15,7 +15,7 @@ created: 2026-04-15
 
 | # | Title | Effort | Priority | Workflow | Status |
 |---|-------|--------|----------|----------|--------|
-| #4 | Add webglOpacity() style helper | moderate | low | wf: abbr | Pending |
+| #4 | Add webglOpacity() style helper | moderate | low | wf: abbr | Complete |
 
 ## Pipeline Progress
 
@@ -25,8 +25,8 @@ created: 2026-04-15
 |-------|--------|----------|-----------|
 | Outline | Complete | OUTLINE-4.json + .md | 2026-04-15 |
 | Spec (abbr) | Complete | PLAN-4.json | 2026-04-15 |
-| Implement | Pending | — | — |
-| Ship | Pending | — | — |
+| Implement | Complete | 865c396d | 2026-04-15 |
+| Ship | Complete | d3fc/d3fc#1900 | 2026-04-15 |
 
 ## Artifacts
 
