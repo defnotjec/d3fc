@@ -1,0 +1,83 @@
+{
+  "schema_version": "2.0",
+  "type": "outline",
+  "issue": 4,
+  "title": "Add webglOpacity() style helper for WebGL series",
+  "url": "https://github.com/defnotjec/d3fc/issues/4",
+  "workflow": "wf: abbr",
+  "current_phase": "outline",
+  "status": "pending",
+  "gates": {
+    "outline_approved": true,
+    "spec_approved": false,
+    "review_verdict": null
+  },
+  "scope": {
+    "in_scope": [
+      "New webglOpacity() style module matching webglFillColor/webglStrokeColor API",
+      "Support constant value (.value(0.5)) and per-datum function (.value((d, i) => ...))",
+      "Fragment shader snippet with uOpacity uniform that multiplies gl_FragColor.a",
+      "Wire through programBuilder and series decorate pattern",
+      "Export from d3fc-webgl package index",
+      "Example in examples/ demonstrating constant and per-datum opacity",
+      "Standalone PR — include gl.BLEND lines if not already present (idempotent)",
+      "Before/after screenshots in PR body"
+    ],
+    "out_of_scope": [
+      "Changing webglFillColor or webglStrokeColor APIs",
+      "Adding opacity to SVG or Canvas series (they already have it via decorate)",
+      "Per-element opacity on non-WebGL series",
+      "Opacity animation or transitions"
+    ],
+    "acceptance_criteria": [
+      "fc.webglOpacity() is exported from d3fc-webgl and available on the fc global",
+      ".value(0.5) sets constant 50% opacity for all elements in the series",
+      ".value((d, i) => ...) sets per-datum opacity",
+      "Opacity multiplies with fillColor alpha (0.5 opacity + 0.5 fillColor alpha = 0.25 effective)",
+      "Example demonstrates both constant and per-datum usage",
+      "All 377 existing tests pass",
+      "Build and lint pass",
+      "Before/after screenshots show visible difference"
+    ],
+    "dependencies": [
+      "d3fc/d3fc#1899 (blending fix) — included in PR as idempotent lines"
+    ],
+    "assumptions": [
+      "Fragment shader pipeline supports appending new uniform snippets",
+      "attributeProjector pattern works for per-datum float values (not just vec4)",
+      "webglFillColor's dirty tracking pattern is the correct model to follow"
+    ],
+    "risks": [
+      {
+        "risk": "Per-datum opacity may need a float attribute instead of vec4",
+        "likelihood": "medium",
+        "impact": "medium",
+        "mitigation": "Research attributeProjector to confirm float support before implementing"
+      },
+      {
+        "risk": "Shader snippet insertion order may affect opacity multiplication",
+        "likelihood": "low",
+        "impact": "medium",
+        "mitigation": "Append opacity snippet after fillColor/strokeColor in fragment shader"
+      }
+    ]
+  },
+  "backend_deployment_required": false,
+  "backend_indicators": [],
+  "effort_confidence": "medium",
+  "artifacts": {
+    "outline": "agents/outlines/OUTLINE-4.json",
+    "scope": null,
+    "plan": null,
+    "validation": null,
+    "assessment": null,
+    "compliance": null,
+    "review": null
+  },
+  "labels": {
+    "workflow": "wf: abbr",
+    "effort": "effort: moderate",
+    "priority": "pri: low"
+  },
+  "last_updated": "2026-04-15T00:00:00Z"
+}
