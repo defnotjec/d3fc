@@ -15,7 +15,7 @@ created: 2026-04-15
 
 | # | Title | Effort | Priority | Workflow | Status |
 |---|-------|--------|----------|----------|--------|
-| #3 | WebGL series ignores alpha — blending not enabled | trivial | medium | wf: direct | Pending |
+| #3 | WebGL series ignores alpha — blending not enabled | trivial | medium | wf: direct | Complete |
 
 ## Pipeline Progress
 
@@ -23,8 +23,8 @@ created: 2026-04-15
 
 | Phase | Status | Artifact | Completed |
 |-------|--------|----------|-----------|
-| Implement | Pending | — | — |
-| Ship | Pending | — | — |
+| Implement | Complete | a8143a6b | 2026-04-15 |
+| Ship | Complete | d3fc/d3fc#1899 | 2026-04-15 |
 
 ## Artifacts
 
