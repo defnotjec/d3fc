@@ -1,0 +1,64 @@
+{
+  "schema_version": "2.0",
+  "type": "outline",
+  "issue": 1,
+  "title": "Axis sets invalid SVG visibility=\"false\" on visible tick elements",
+  "url": "https://github.com/defnotjec/d3fc/issues/1",
+  "workflow": "wf: abbr",
+  "current_phase": "spec",
+  "status": "in-progress",
+  "gates": {
+    "outline_approved": true,
+    "spec_approved": true,
+    "review_verdict": null
+  },
+  "scope": {
+    "in_scope": [
+      "Fix visibility attribute assignment in axisBase.js lines 124 and 130",
+      "Replace && short-circuit with ternary returning null for non-hidden case"
+    ],
+    "out_of_scope": [
+      "Refactoring other axis code",
+      "Adding tests beyond verifying the fix",
+      "Changing any other packages"
+    ],
+    "acceptance_criteria": [
+      "tickPaths visibility returns 'hidden' when hidden=true, null when hidden=false",
+      "labelOffsets visibility returns 'hidden' when hidden=true, null when hidden=false",
+      "No visibility=\"false\" attributes appear in rendered SVG",
+      "All 377 existing tests continue to pass",
+      "Build (bundle + bundle-min) succeeds"
+    ],
+    "dependencies": [],
+    "assumptions": [
+      "D3 .attr() removes attribute when value is null (documented D3 behavior)",
+      "No downstream code relies on visibility=\"false\" being set"
+    ],
+    "risks": [
+      {
+        "risk": "Existing tests may not cover visibility attribute behavior",
+        "likelihood": "low",
+        "impact": "low",
+        "mitigation": "Two-character fix, behavior is well-understood"
+      }
+    ]
+  },
+  "backend_deployment_required": false,
+  "backend_indicators": [],
+  "effort_confidence": "high",
+  "artifacts": {
+    "outline": "agents/outlines/OUTLINE-1.json",
+    "scope": null,
+    "plan": "agents/plans/PLAN-1.json",
+    "validation": null,
+    "assessment": null,
+    "compliance": null,
+    "review": null
+  },
+  "labels": {
+    "workflow": "wf: abbr",
+    "effort": "effort: trivial",
+    "priority": "pri: medium"
+  },
+  "last_updated": "2026-04-15T00:00:00Z"
+}

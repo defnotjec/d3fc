@@ -1,0 +1,58 @@
+{
+  "schema_version": "2.0",
+  "type": "plan",
+  "issue": 1,
+  "title": "Fix axis visibility attribute returning false instead of null",
+  "workflow": "wf: abbr",
+  "source_outline": "agents/outlines/OUTLINE-1.json",
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "Fix + Ship",
+      "steps": [
+        {
+          "id": "step-1",
+          "description": "Create fix branch from upstream/master",
+          "type": "git",
+          "command": "git fetch upstream && git checkout -b fix/axis-visibility-false upstream/master"
+        },
+        {
+          "id": "step-2",
+          "description": "Apply ternary fix to axisBase.js lines 124 and 130",
+          "type": "edit",
+          "file": "packages/d3fc-axis/src/axisBase.js",
+          "changes": [
+            {
+              "line": 124,
+              "from": ".attr('visibility', (d, i) => tickPaths[i].hidden && 'hidden')",
+              "to": ".attr('visibility', (d, i) => tickPaths[i].hidden ? 'hidden' : null)"
+            },
+            {
+              "line": 130,
+              "from": ".attr('visibility', (d, i) => labelOffsets[i].hidden && 'hidden')",
+              "to": ".attr('visibility', (d, i) => labelOffsets[i].hidden ? 'hidden' : null)"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "description": "Add changeset for patch version bump",
+          "type": "command",
+          "command": "npx changeset"
+        },
+        {
+          "id": "step-4",
+          "description": "Build and test",
+          "type": "command",
+          "commands": [
+            "npm run bundle",
+            "npm run bundle-min",
+            "npm test",
+            "npm run lint"
+          ]
+        }
+      ]
+    }
+  ],
+  "last_updated": "2026-04-15T00:00:00Z"
+}
