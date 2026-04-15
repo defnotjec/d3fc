@@ -24,7 +24,7 @@ created: 2026-04-15
 | Phase | Status | Artifact | Completed |
 |-------|--------|----------|-----------|
 | Outline | Complete | OUTLINE-4.json + .md | 2026-04-15 |
-| Spec (abbr) | Pending | — | — |
+| Spec (abbr) | Complete | PLAN-4.json | 2026-04-15 |
 | Implement | Pending | — | — |
 | Ship | Pending | — | — |
 
@@ -36,6 +36,7 @@ created: 2026-04-15
 | PROGRESS-webgl-opacity.md | `agents/sprints/` | Created |
 | OUTLINE-4.json | `agents/outlines/` | Created |
 | OUTLINE-4.md | `agents/outlines/` | Created |
+| PLAN-4.json | `agents/plans/` | Created |
 
 ## Branch Topology
 

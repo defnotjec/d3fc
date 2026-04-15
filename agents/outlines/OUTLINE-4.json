@@ -5,11 +5,11 @@
   "title": "Add webglOpacity() style helper for WebGL series",
   "url": "https://github.com/defnotjec/d3fc/issues/4",
   "workflow": "wf: abbr",
-  "current_phase": "outline",
-  "status": "pending",
+  "current_phase": "spec",
+  "status": "in-progress",
   "gates": {
     "outline_approved": true,
-    "spec_approved": false,
+    "spec_approved": true,
     "review_verdict": null
   },
   "scope": {
@@ -68,7 +68,7 @@
   "artifacts": {
     "outline": "agents/outlines/OUTLINE-4.json",
     "scope": null,
-    "plan": null,
+    "plan": "agents/plans/PLAN-4.json",
     "validation": null,
     "assessment": null,
     "compliance": null,

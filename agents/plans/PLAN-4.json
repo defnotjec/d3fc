@@ -1,0 +1,125 @@
+{
+  "schema_version": "2.0",
+  "type": "plan",
+  "issue": 4,
+  "title": "Add webglOpacity() style helper for WebGL series",
+  "workflow": "wf: abbr",
+  "source_outline": "agents/outlines/OUTLINE-4.json",
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "Create opacity style module",
+      "steps": [
+        {
+          "id": "step-1.1",
+          "description": "Create fix branch from upstream/master",
+          "type": "git"
+        },
+        {
+          "id": "step-1.2",
+          "description": "Add vertex shader snippets for opacity (aOpacity attribute, vOpacity varying)",
+          "type": "edit",
+          "file": "packages/d3fc-webgl/src/shaders/vertexShaderSnippets.js",
+          "details": "Add header: 'attribute float aOpacity;\\nvarying float vOpacity;' and body: 'vOpacity = aOpacity;'"
+        },
+        {
+          "id": "step-1.3",
+          "description": "Add fragment shader snippets for opacity (vOpacity varying, multiply gl_FragColor.a)",
+          "type": "edit",
+          "file": "packages/d3fc-webgl/src/shaders/fragmentShaderSnippets.js",
+          "details": "Add header: 'varying float vOpacity;' and body: 'gl_FragColor = vec4(gl_FragColor.rgb, gl_FragColor.a * vOpacity);' — must be appended LAST"
+        },
+        {
+          "id": "step-1.4",
+          "description": "Create packages/d3fc-webgl/src/style/opacity.js following fillColor pattern",
+          "type": "write",
+          "file": "packages/d3fc-webgl/src/style/opacity.js",
+          "details": "size=1, constantAttribute([1.0]).size(1) default, attribute().size(1) for per-datum, initial value 1.0 (fully opaque)"
+        },
+        {
+          "id": "step-1.5",
+          "description": "Export webglOpacity from d3fc-webgl index.js",
+          "type": "edit",
+          "file": "packages/d3fc-webgl/index.js"
+        },
+        {
+          "id": "step-1.6",
+          "description": "Include gl.BLEND enable lines in programBuilder.js if not already present",
+          "type": "edit",
+          "file": "packages/d3fc-webgl/src/program/programBuilder.js",
+          "details": "Idempotent — if #1899 already merged, these lines are no-ops"
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "Create example",
+      "steps": [
+        {
+          "id": "step-2.1",
+          "description": "Create examples/series-webgl-opacity/ with standard boilerplate",
+          "type": "scaffold",
+          "files": [
+            "examples/series-webgl-opacity/index.html",
+            "examples/series-webgl-opacity/index.js",
+            "examples/series-webgl-opacity/README.md",
+            "examples/series-webgl-opacity/__tests__/index.js"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "description": "Write index.js demonstrating constant opacity and per-datum opacity side by side or toggled",
+          "type": "write"
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "Verify",
+      "steps": [
+        {
+          "id": "step-3.1",
+          "description": "npm run bundle && npm run bundle-min && npm test && npm run lint",
+          "type": "command"
+        },
+        {
+          "id": "step-3.2",
+          "description": "Visual verification in browser — constant opacity, per-datum opacity, interaction with fillColor alpha",
+          "type": "verify"
+        }
+      ]
+    },
+    {
+      "id": "phase-4",
+      "name": "Ship",
+      "steps": [
+        {
+          "id": "step-4.1",
+          "description": "Capture before/after screenshots (user provides from real browser)",
+          "type": "evidence"
+        },
+        {
+          "id": "step-4.2",
+          "description": "Add changeset, commit, push with explicit refspec",
+          "type": "git"
+        },
+        {
+          "id": "step-4.3",
+          "description": "Draft PR body for user review BEFORE creating PR",
+          "type": "review"
+        },
+        {
+          "id": "step-4.4",
+          "description": "Create upstream PR with before/after images",
+          "type": "ship"
+        },
+        {
+          "id": "step-4.5",
+          "description": "Comment on d3fc/d3fc#1893 linking the PR",
+          "type": "comment"
+        }
+      ]
+    }
+  ],
+  "last_updated": "2026-04-15T00:00:00Z"
+}
