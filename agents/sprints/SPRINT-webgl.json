@@ -1,0 +1,50 @@
+{
+  "schema_version": "2.0",
+  "type": "sprint",
+  "milestone": "WebGL",
+  "repo": "defnotjec/d3fc",
+  "created": "2026-04-15",
+  "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+  "issues": [
+    {
+      "number": 2,
+      "title": "Add WebGL bar interaction example (click/hover with scale inversion)",
+      "labels": {
+        "workflow": "wf: abbr",
+        "effort": "effort: moderate",
+        "priority": "pri: low",
+        "type": "is: enhancement",
+        "flow": "flow: non-blocking"
+      },
+      "branch": "fix/webgl-bar-interaction",
+      "status": "pending",
+      "dependencies": [],
+      "story_points": 3
+    }
+  ],
+  "effort_summary": {
+    "total_points": 3,
+    "issues_count": 1,
+    "by_effort": {
+      "moderate": 1
+    }
+  },
+  "parallel_tracks": [],
+  "worktrees": {
+    "topology": "fix/* → upstream/master (each fix is independent upstream PR)",
+    "issues": [
+      {
+        "issue": 2,
+        "branch": "fix/webgl-bar-interaction",
+        "base": "upstream/master",
+        "status": "pending"
+      }
+    ]
+  },
+  "tasks": {
+    "outline": "pending",
+    "spec": "pending",
+    "implement": "pending",
+    "ship": "pending"
+  }
+}

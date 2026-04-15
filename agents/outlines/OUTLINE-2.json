@@ -1,0 +1,91 @@
+{
+  "schema_version": "2.0",
+  "type": "outline",
+  "issue": 2,
+  "title": "Add WebGL bar interaction example (click/hover with scale inversion)",
+  "url": "https://github.com/defnotjec/d3fc/issues/2",
+  "workflow": "wf: abbr",
+  "current_phase": "outline",
+  "status": "pending",
+  "gates": {
+    "outline_approved": true,
+    "spec_approved": false,
+    "review_verdict": null
+  },
+  "scope": {
+    "in_scope": [
+      "Scale-inversion hover detection using xScale.invert()",
+      "Visual hover feedback via fill color change in decorate callback",
+      "Click handler that displays clicked bar's index and value",
+      "HTML tooltip overlay positioned near hovered bar",
+      "200 bars via randomGeometricBrownianMotion",
+      "Code comments explaining the technique",
+      "CodePen standalone version",
+      "Comment on d3fc/d3fc#1803 with explanation and CodePen link"
+    ],
+    "out_of_scope": [
+      "SVG overlay approach (separate example if ever needed)",
+      "Color picking / GPU-based hit testing",
+      "Multi-series interaction",
+      "Zoom or pan interaction",
+      "Touch events / mobile support",
+      "Performance benchmarking"
+    ],
+    "acceptance_criteria": [
+      "Hovering a bar highlights it with a distinct fill color",
+      "Tooltip shows bar index and value near cursor",
+      "Clicking a bar logs/displays its data",
+      "Mouse leave clears highlight and tooltip",
+      "Example follows d3fc conventions exactly (boilerplate, seedrandom, mockdate, screenshot test)",
+      "CodePen version works standalone with unpkg CDN imports",
+      "All 377 existing d3fc tests continue to pass",
+      "Screenshot test produces consistent snapshot"
+    ],
+    "dependencies": [],
+    "assumptions": [
+      "Bars have uniform width (randomGeometricBrownianMotion with linear x scale)",
+      "xScale.invert() provides sufficient precision for bar identification",
+      "WebGL fill color can be set per-bar via decorate callback",
+      "d3fc example test harness works for new examples without modification"
+    ],
+    "risks": [
+      {
+        "risk": "WebGL decorate/fill callback may not support per-bar coloring efficiently",
+        "likelihood": "low",
+        "impact": "medium",
+        "mitigation": "webglFillColor utility exists and is used in other examples"
+      },
+      {
+        "risk": "Screenshot test may be flaky due to hover state",
+        "likelihood": "medium",
+        "impact": "low",
+        "mitigation": "Screenshot captures default state without hover"
+      },
+      {
+        "risk": "Tooltip positioning may be tricky with d3fc-canvas custom element",
+        "likelihood": "medium",
+        "impact": "low",
+        "mitigation": "Use absolute positioning relative to the container"
+      }
+    ]
+  },
+  "backend_deployment_required": false,
+  "backend_indicators": [],
+  "effort_confidence": "high",
+  "design_required": false,
+  "artifacts": {
+    "outline": "agents/outlines/OUTLINE-2.json",
+    "scope": null,
+    "plan": null,
+    "validation": null,
+    "assessment": null,
+    "compliance": null,
+    "review": null
+  },
+  "labels": {
+    "workflow": "wf: abbr",
+    "effort": "effort: moderate",
+    "priority": "pri: low"
+  },
+  "last_updated": "2026-04-15T00:00:00Z"
+}
