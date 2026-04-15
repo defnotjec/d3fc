@@ -1,0 +1,48 @@
+{
+  "schema_version": "2.0",
+  "type": "sprint",
+  "milestone": "WebGL",
+  "sprint_name": "webgl-blending",
+  "repo": "defnotjec/d3fc",
+  "created": "2026-04-15",
+  "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+  "issues": [
+    {
+      "number": 3,
+      "title": "WebGL series ignores alpha channel — blending not enabled by default",
+      "labels": {
+        "workflow": "wf: direct",
+        "effort": "effort: trivial",
+        "priority": "pri: medium",
+        "type": "is: bug",
+        "flow": "flow: non-blocking"
+      },
+      "branch": "fix/webgl-enable-blending",
+      "status": "pending",
+      "dependencies": [],
+      "story_points": 1
+    }
+  ],
+  "effort_summary": {
+    "total_points": 1,
+    "issues_count": 1,
+    "by_effort": {
+      "trivial": 1
+    }
+  },
+  "worktrees": {
+    "topology": "fix/* → upstream/master (each fix is independent upstream PR)",
+    "issues": [
+      {
+        "issue": 3,
+        "branch": "fix/webgl-enable-blending",
+        "base": "upstream/master",
+        "status": "pending"
+      }
+    ]
+  },
+  "tasks": {
+    "implement": "pending",
+    "ship": "pending"
+  }
+}
