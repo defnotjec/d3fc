@@ -5,11 +5,11 @@
   "title": "Add WebGL bar interaction example (click/hover with scale inversion)",
   "url": "https://github.com/defnotjec/d3fc/issues/2",
   "workflow": "wf: abbr",
-  "current_phase": "outline",
-  "status": "pending",
+  "current_phase": "spec",
+  "status": "in-progress",
   "gates": {
     "outline_approved": true,
-    "spec_approved": false,
+    "spec_approved": true,
     "review_verdict": null
   },
   "scope": {
@@ -76,7 +76,7 @@
   "artifacts": {
     "outline": "agents/outlines/OUTLINE-2.json",
     "scope": null,
-    "plan": null,
+    "plan": "agents/plans/PLAN-2.json",
     "validation": null,
     "assessment": null,
     "compliance": null,

@@ -1,0 +1,130 @@
+{
+  "schema_version": "2.0",
+  "type": "plan",
+  "issue": 2,
+  "title": "Add WebGL bar interaction example (click/hover with scale inversion)",
+  "workflow": "wf: abbr",
+  "source_outline": "agents/outlines/OUTLINE-2.json",
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "Build example",
+      "steps": [
+        {
+          "id": "step-1.1",
+          "description": "Create fix branch from upstream/master",
+          "type": "git",
+          "command": "git fetch upstream && git checkout -b fix/webgl-bar-interaction upstream/master"
+        },
+        {
+          "id": "step-1.2",
+          "description": "Create examples/series-webgl-bar-interaction/ directory structure",
+          "type": "scaffold",
+          "files": [
+            "examples/series-webgl-bar-interaction/index.html",
+            "examples/series-webgl-bar-interaction/index.js",
+            "examples/series-webgl-bar-interaction/README.md",
+            "examples/series-webgl-bar-interaction/__tests__/index.js"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "description": "Write index.html following d3fc boilerplate (seedrandom, mockdate, relative imports)",
+          "type": "write",
+          "file": "examples/series-webgl-bar-interaction/index.html"
+        },
+        {
+          "id": "step-1.4",
+          "description": "Write index.js with scale-inversion hover/click, webglFillColor decorate, tooltip",
+          "type": "write",
+          "file": "examples/series-webgl-bar-interaction/index.js",
+          "technical_notes": {
+            "data": "200 bars via fc.randomGeometricBrownianMotion().steps(200)(1)",
+            "hover_detection": "xScale.invert(event.offsetX) → Math.round() → clamp to [0, data.length-1]",
+            "fill_color": "fc.webglFillColor().value(colorFunc).data(data)(program) in decorate",
+            "dirty_tracking": "Must create new colorFunc reference on hoveredIndex change for fillColor dirty check",
+            "tooltip": "Absolute-positioned div, shown on mousemove, hidden on mouseleave",
+            "click": "Console.log or display bar data on click",
+            "code_comments": "Explain scale inversion, webglFillColor dirty tracking, why not SVG overlay"
+          }
+        },
+        {
+          "id": "step-1.5",
+          "description": "Write README.md (1-3 sentences)",
+          "type": "write",
+          "file": "examples/series-webgl-bar-interaction/README.md"
+        },
+        {
+          "id": "step-1.6",
+          "description": "Write __tests__/index.js (standard Puppeteer screenshot test)",
+          "type": "write",
+          "file": "examples/series-webgl-bar-interaction/__tests__/index.js"
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "Battle test",
+      "steps": [
+        {
+          "id": "step-2.1",
+          "description": "Serve example locally and verify hover/click/tooltip behavior in browser",
+          "type": "verify"
+        },
+        {
+          "id": "step-2.2",
+          "description": "Run npm run bundle && npm test && npm run lint to ensure no regressions",
+          "type": "command"
+        },
+        {
+          "id": "step-2.3",
+          "description": "Iterate on example if needed — fix issues discovered during testing",
+          "type": "iterate"
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "CodePen",
+      "steps": [
+        {
+          "id": "step-3.1",
+          "description": "Create CodePen version using unpkg CDN imports, verify it works standalone",
+          "type": "codepen"
+        },
+        {
+          "id": "step-3.2",
+          "description": "Save CodePen under defnotjec account, get permanent URL",
+          "type": "codepen"
+        }
+      ]
+    },
+    {
+      "id": "phase-4",
+      "name": "Comment + Ship",
+      "steps": [
+        {
+          "id": "step-4.1",
+          "description": "Draft comment for d3fc/d3fc#1803 — explain three approaches, recommend scale inversion, link CodePen",
+          "type": "comment"
+        },
+        {
+          "id": "step-4.2",
+          "description": "Iterate on comment wording with user",
+          "type": "review"
+        },
+        {
+          "id": "step-4.3",
+          "description": "Post comment on d3fc/d3fc#1803",
+          "type": "command"
+        },
+        {
+          "id": "step-4.4",
+          "description": "Add changeset, commit, push fix branch, create upstream PR to d3fc/d3fc",
+          "type": "ship"
+        }
+      ]
+    }
+  ],
+  "last_updated": "2026-04-15T00:00:00Z"
+}
