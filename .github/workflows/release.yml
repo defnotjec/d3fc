@@ -2,18 +2,20 @@ name: Release
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - "d3fc-v6-latest"
+      - "d3fc-v7-latest"
 
-concurrency:  ${{ github.workflow }}-${{ github.ref }}
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   build-test-lint:
     name: Build, test, and lint
     uses: ./.github/workflows/development.yml
 
-  publish-npm:
-    name: Publish npm package(s)
-    if: github.repository == 'd3fc/d3fc'
+  changelog:
+    name: Generate changelog and version PRs
+    if: github.repository == 'defnotjec/d3fc'
     needs: build-test-lint
     runs-on: ubuntu-latest
     permissions:
@@ -29,19 +31,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.15.0
-          registry-url: https://registry.npmjs.org/
 
       - name: "Install dependencies"
         run: npm ci
-      
+
       - name: "Running build"
         run: npm run build
 
-      - name: "Publish to npm"
-        id: changesets
-        uses: d3fc/changesets-action@v1.4.9
+      - name: "Create version PR / changelog"
+        uses: changesets/action@v1
         with:
-          publish: npm run publish
+          title: "chore: version packages"
+          commit: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
