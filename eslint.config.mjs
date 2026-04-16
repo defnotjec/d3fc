@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import neostandard from 'neostandard';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import tseslint from 'typescript-eslint';
 import globals from 'globals';
 
@@ -89,14 +90,15 @@ export default [
         }
     },
 
-    // Enhanced checks: neostandard for specific packages
-    // TODO: Prettier enforcement is temporarily disabled during this migration.
-    // Re-enable eslint-plugin-prettier/recommended here after reformatting
-    // enforced files with Prettier 3 in a follow-up PR.
+    // Enhanced checks: neostandard + prettier for specific packages
     ...neostandard({ semi: true, noStyle: true }).map(config => ({
         ...config,
         files: allEnhanced
     })),
+    {
+        files: allEnhanced,
+        ...eslintPluginPrettierRecommended
+    },
 
     // Enhanced tests: add browser + jest + node globals
     {
