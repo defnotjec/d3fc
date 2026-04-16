@@ -2,7 +2,7 @@ import babel from '@rollup/plugin-babel';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 
-const external = key =>
+const external = (key) =>
     key.indexOf('d3-') === 0 || key.indexOf('@d3fc/d3fc-') === 0;
 const globals = function (key) {
     if (key.indexOf('d3-') === 0) {
@@ -13,7 +13,7 @@ const globals = function (key) {
     }
 };
 
-export default commandLineArgs => {
+export default (commandLineArgs) => {
     process.env.env = commandLineArgs.configEnv || 'dev';
     const shouldMinify = process.env.env === 'prod';
     const plugins = [babel({ cwd: '../..' }), nodeResolve()];
@@ -23,7 +23,7 @@ export default commandLineArgs => {
     const pkgInfo = require(`${process.cwd()}/package.json`);
     if (!pkgInfo) {
         throw Error(
-            'Expected build to be triggered from directory containing package.json'
+            'Expected build to be triggered from directory containing package.json',
         );
     }
     let name = pkgInfo.name;
@@ -40,7 +40,7 @@ export default commandLineArgs => {
             format: 'umd',
             globals,
             extend: true,
-            name: 'fc'
-        }
+            name: 'fc',
+        },
     };
 };

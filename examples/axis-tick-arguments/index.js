@@ -16,12 +16,12 @@ d3.select(container)
         svg.append('g')
             .attr('transform', 'translate(0, 80)')
             .call(
-                d3.axisBottom(scale).tickSizeInner(2).tickArguments([20, 's'])
+                d3.axisBottom(scale).tickSizeInner(2).tickArguments([20, 's']),
             );
         svg.append('g')
             .attr('transform', 'translate(0, 110)')
             .call(
-                fc.axisBottom(scale).tickSizeInner(2).tickArguments([20, 's'])
+                fc.axisBottom(scale).tickSizeInner(2).tickArguments([20, 's']),
             );
 
         svg.append('g')
@@ -31,7 +31,7 @@ d3.select(container)
             .attr('transform', 'translate(0, 170)')
             .call(fc.axisBottom(scale).tickFormat(d3.format(',.0f')));
     })
-    .on('measure', event => {
+    .on('measure', (event) => {
         const { width } = event.detail;
         scale.range([0, width]);
     });

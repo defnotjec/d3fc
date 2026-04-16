@@ -7,7 +7,7 @@ exports.toHaveConsistentPerformance = async function (received, runs = 3) {
     const averages = {};
     for (let run = 0; run < runs; run++) {
         await page.tracing.start({
-            path: join(tracesDirectory, `trace-${run}.json`)
+            path: join(tracesDirectory, `trace-${run}.json`),
         });
         await received(run);
         await page.tracing.stop();

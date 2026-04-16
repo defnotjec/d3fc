@@ -1,6 +1,6 @@
 const width = 700;
 const height = 350;
-let strategy = strategyInterceptor(fc.modeMedian().value(d => d.y));
+let strategy = strategyInterceptor(fc.modeMedian().value((d) => d.y));
 let data = [];
 
 // we intercept the strategy in order to compute statistics
@@ -14,7 +14,7 @@ function strategyInterceptor(strategy) {
         if (!interceptor.time) {
             Object.defineProperty(interceptor, 'time', {
                 enumerable: false,
-                writable: true
+                writable: true,
             });
         }
         interceptor.time = time;
@@ -41,7 +41,7 @@ function circleGenerator() {
         const y = Math.sqrt(height * height - Math.pow(x - height, 2));
         return {
             x,
-            y: y + Math.random() * 50 - 25
+            y: y + Math.random() * 50 - 25,
         };
     };
 }
@@ -51,7 +51,7 @@ function chartGenerator() {
     return function () {
         const nextData = {
             x: lastData.x + Math.random() * 10 - 4,
-            y: lastData.y + Math.random() * 20 - 10
+            y: lastData.y + Math.random() * 20 - 10,
         };
         lastData = nextData;
         return nextData;
@@ -63,16 +63,16 @@ const svg = d3.select('svg').attr('width', width).attr('height', height);
 function render() {
     svg.selectAll('g').remove();
 
-    const xExtent = d3.extent(data, d => d.x);
+    const xExtent = d3.extent(data, (d) => d.x);
     const xScale = d3.scaleLinear().domain(xExtent).range([0, width]);
 
-    const yExtent = d3.extent(data, d => d.y);
+    const yExtent = d3.extent(data, (d) => d.y);
     const yScale = d3.scaleLinear().domain(yExtent).range([height, 0]);
 
     const path = d3
         .line()
-        .x(d => xScale(d.x))
-        .y(d => yScale(d.y));
+        .x((d) => xScale(d.x))
+        .y((d) => yScale(d.y));
 
     svg.append('g')
         .selectAll('path')
@@ -93,24 +93,24 @@ function getStrategy() {
             return fc
                 .modeMedian()
                 .bucketSize(getBucketSize())
-                .value(d => d.y);
+                .value((d) => d.y);
         }
         case 'largestTriangleOneBucket': {
             return fc
                 .largestTriangleOneBucket()
                 .bucketSize(getBucketSize())
-                .x(d => d.x)
-                .y(d => d.y);
+                .x((d) => d.x)
+                .y((d) => d.y);
         }
         case 'largestTriangleThreeBucket': {
             return fc
                 .largestTriangleThreeBucket()
                 .bucketSize(getBucketSize())
-                .x(d => d.x)
-                .y(d => d.y);
+                .x((d) => d.x)
+                .y((d) => d.y);
         }
         default: {
-            return d => d;
+            return (d) => d;
         }
     }
 }
@@ -125,7 +125,7 @@ function updateBucketInfo() {
         document.getElementById('data-count').value / 10;
 }
 
-d3.select('#strategy-selector').on('change', event => {
+d3.select('#strategy-selector').on('change', (event) => {
     event.preventDefault();
     strategy = getStrategy();
     strategy = strategyInterceptor(strategy);
@@ -141,20 +141,20 @@ function sliderChange() {
 
 d3.select('#bucket-size')
     .on('change', sliderChange)
-    .on('mousemove', event => {
+    .on('mousemove', (event) => {
         if (event.buttons === 1) {
             sliderChange();
         }
     });
 
-d3.select('#generate-chart').on('click', event => {
+d3.select('#generate-chart').on('click', (event) => {
     event.preventDefault();
     generateData(chartGenerator());
     render();
     updateBucketInfo();
 });
 
-d3.select('#generate-circle').on('click', event => {
+d3.select('#generate-circle').on('click', (event) => {
     event.preventDefault();
     generateData(circleGenerator());
     render();

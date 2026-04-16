@@ -1,8 +1,8 @@
 function bollingerBandsExample() {
     let xScale = d3.scaleTime();
     let yScale = d3.scaleLinear();
-    let mainValue = d => d.close;
-    let crossValue = d => d.date;
+    let mainValue = (d) => d.close;
+    let crossValue = (d) => d.date;
 
     const area = fc
         .seriesSvgArea()
@@ -26,7 +26,7 @@ function bollingerBandsExample() {
                     'class',
                     (d, i) =>
                         'multi bollinger ' +
-                        ['area', 'upper', 'lower', 'average'][i]
+                        ['area', 'upper', 'lower', 'average'][i],
                 );
             });
 
@@ -79,18 +79,18 @@ const data = dataGenerator(50);
 
 const xScale = d3
     .scaleTime()
-    .domain(fc.extentDate().accessors([d => d.date])(data));
+    .domain(fc.extentDate().accessors([(d) => d.date])(data));
 
 const yScale = d3.scaleLinear().domain(
     fc
         .extentLinear()
         .pad([0.4, 0.4])
-        .accessors([d => d.high, d => d.low])(data)
+        .accessors([(d) => d.high, (d) => d.low])(data),
 );
 
 // START
 // Create and apply the bollinger algorithm
-const bollingerAlgorithm = fc.indicatorBollingerBands().value(d => d.close);
+const bollingerAlgorithm = fc.indicatorBollingerBands().value((d) => d.close);
 const bollingerData = bollingerAlgorithm(data);
 const mergedData = data.map((d, i) => Object.assign({}, d, bollingerData[i]));
 
@@ -104,7 +104,7 @@ d3.select(container)
     .on('draw', () => {
         d3.select(container).select('svg').datum(mergedData).call(bollinger);
     })
-    .on('measure', event => {
+    .on('measure', (event) => {
         const { width, height } = event.detail;
         xScale.range([0, width]);
         yScale.range([height, 0]);

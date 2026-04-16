@@ -14,7 +14,7 @@ const domain = [
     'Cheese',
     'Marzipan',
     'Peas',
-    'Popcorn'
+    'Popcorn',
 ];
 
 const renderAxis = (axisFactory, selector) => {
@@ -27,13 +27,13 @@ const renderAxis = (axisFactory, selector) => {
         .on('draw', () => {
             d3.select(container).select('svg').call(axis);
         })
-        .on('measure', event => {
+        .on('measure', (event) => {
             const { width, height } = event.detail;
             scale.range([
                 0,
                 container.getAttribute('data-orient') === 'vertical'
                     ? height
-                    : width
+                    : width,
             ]);
 
             const containerId = container.getAttribute('id');
@@ -44,13 +44,13 @@ const renderAxis = (axisFactory, selector) => {
                 .select('svg')
                 .attr(
                     'viewBox',
-                    `${-leftOffset} ${-topOffset} ${width} ${height}`
+                    `${-leftOffset} ${-topOffset} ${width} ${height}`,
                 );
         });
     container.requestRedraw();
 };
 
-renderAxis(scale => fc.axisLabelOffset(fc.axisBottom(scale)), '#bottom');
-renderAxis(scale => fc.axisLabelOffset(fc.axisTop(scale)), '#top');
-renderAxis(scale => fc.axisLabelOffset(fc.axisLeft(scale)), '#left');
-renderAxis(scale => fc.axisLabelOffset(fc.axisRight(scale)), '#right');
+renderAxis((scale) => fc.axisLabelOffset(fc.axisBottom(scale)), '#bottom');
+renderAxis((scale) => fc.axisLabelOffset(fc.axisTop(scale)), '#top');
+renderAxis((scale) => fc.axisLabelOffset(fc.axisLeft(scale)), '#left');
+renderAxis((scale) => fc.axisLabelOffset(fc.axisRight(scale)), '#right');

@@ -3,7 +3,7 @@ exports.toBeEqualWithTolerance = (actual, expected, precision) => {
     precision = precision || 5;
     const result = {
         pass: true,
-        message: ''
+        message: '',
     };
     if (actual.length !== expected.length) {
         result.pass = false;

@@ -23,9 +23,7 @@
     },
     "prettier": {
         "singleQuote": true,
-        "tabWidth": 4,
-        "trailingComma": "none",
-        "arrowParens": "avoid"
+        "tabWidth": 4
     },
     "repository": {
         "type": "git",

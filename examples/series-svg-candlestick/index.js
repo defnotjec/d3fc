@@ -4,11 +4,11 @@ const container = document.querySelector('d3fc-svg');
 
 const xScale = d3
     .scaleTime()
-    .domain(fc.extentDate().accessors([d => d.date])(data));
+    .domain(fc.extentDate().accessors([(d) => d.date])(data));
 
 const yScale = d3
     .scaleLinear()
-    .domain(fc.extentLinear().accessors([d => d.high])(data));
+    .domain(fc.extentLinear().accessors([(d) => d.high])(data));
 
 const series = fc.seriesSvgCandlestick().xScale(xScale).yScale(yScale);
 
@@ -16,7 +16,7 @@ d3.select(container)
     .on('draw', () => {
         d3.select(container).select('svg').datum(data).call(series);
     })
-    .on('measure', event => {
+    .on('measure', (event) => {
         const { width, height } = event.detail;
         xScale.range([0, width]);
         yScale.range([height, 0]);

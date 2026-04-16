@@ -15,7 +15,7 @@ const getSnapshot = (snapshotState, currentTestName, hint) => {
 exports.toMatchPerformanceSnapshot = function (
     received,
     hint,
-    { absoluteTolerance = 5, relativeTolerance = 0.05 } = {}
+    { absoluteTolerance = 5, relativeTolerance = 0.05 } = {},
 ) {
     const { snapshotState, currentTestName } = this;
     const expected = getSnapshot(snapshotState, currentTestName, hint);
@@ -24,7 +24,7 @@ exports.toMatchPerformanceSnapshot = function (
     const result = toMatchSnapshot.call(
         this,
         pass && expected != null ? expected : received,
-        hint
+        hint,
     );
     if (result.pass !== pass) {
         throw new Error(`Internal inconsistency ${result.pass} !== ${pass}`);
@@ -33,6 +33,6 @@ exports.toMatchPerformanceSnapshot = function (
         pass,
         message: () => {
             return `Expected ${expected} +/- ${tolerance} for "${hint}" but got ${received}`;
-        }
+        },
     };
 };

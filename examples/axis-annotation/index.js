@@ -33,8 +33,8 @@ const scale = d3.scaleLinear().domain([0, 100]);
 const axis = fc
     .axisBottom(scale)
     .tickValues([...scale.ticks(), annotation])
-    .decorate(g => {
-        g.filter(d => d === annotation)
+    .decorate((g) => {
+        g.filter((d) => d === annotation)
             .select('path')
             .attr('d', 'M0,0 l-10,10 l0,10 l20,0 l0,-10 Z')
             .style('fill', 'rgba(200, 200, 200, 0.8)')
@@ -47,7 +47,7 @@ d3.select(container)
     .on('draw', () => {
         d3.select(container).select('svg').call(axis);
     })
-    .on('measure', event => {
+    .on('measure', (event) => {
         const { width } = event.detail;
         scale.range([0, width]);
     });

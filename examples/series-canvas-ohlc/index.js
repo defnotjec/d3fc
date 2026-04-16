@@ -4,11 +4,11 @@ const container = document.querySelector('d3fc-canvas');
 
 const xScale = d3
     .scaleTime()
-    .domain(fc.extentDate().accessors([d => d.date])(data));
+    .domain(fc.extentDate().accessors([(d) => d.date])(data));
 
 const yScale = d3
     .scaleLinear()
-    .domain(fc.extentLinear().accessors([d => d.high, d => d.low])(data));
+    .domain(fc.extentLinear().accessors([(d) => d.high, (d) => d.low])(data));
 
 const series = fc.seriesCanvasOhlc().xScale(xScale).yScale(yScale);
 
@@ -16,7 +16,7 @@ d3.select(container)
     .on('draw', () => {
         series(data);
     })
-    .on('measure', event => {
+    .on('measure', (event) => {
         const { width, height } = event.detail;
         xScale.range([0, width]);
         yScale.range([height, 0]);

@@ -1,4 +1,4 @@
-const sample = d => ({ x: d / 3, y: Math.sin(d / 3) });
+const sample = (d) => ({ x: d / 3, y: Math.sin(d / 3) });
 
 const data = d3.range(50).map(sample);
 
@@ -42,7 +42,7 @@ d3.select('#y-axis-right').on('draw', (event, d) => {
 
 d3.select('#plot-area')
     .datum([])
-    .on('measure', event => {
+    .on('measure', (event) => {
         // Use measure event to ensure scales have their range updated before
         // any of the elements (including the axes) are drawn.
         const { width, height } = event.detail;
@@ -60,10 +60,10 @@ d3.select('#plot-area')
 const chartContainer = d3.select('#chart').on('draw', () => {
     // Use group draw event to ensure scales have their domain updated before
     // any of the elements are drawn (draw events are dispatched in document order).
-    const xExtent = fc.extentLinear().accessors([d => d.x]);
+    const xExtent = fc.extentLinear().accessors([(d) => d.x]);
     xScale.domain(xExtent(data));
 
-    const yExtent = fc.extentLinear().accessors([d => d.y]);
+    const yExtent = fc.extentLinear().accessors([(d) => d.y]);
     yScale.domain(yExtent(data));
 });
 

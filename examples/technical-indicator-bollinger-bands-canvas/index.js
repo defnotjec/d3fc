@@ -20,11 +20,11 @@ function bollingerBandsExample() {
     const styles = {
         area: {
             fillStyle: 'rgba(153, 204, 255, 0.5)',
-            strokeStyle: 'transparent'
+            strokeStyle: 'transparent',
         },
         upper: { strokeStyle: '#06c' },
         lower: { strokeStyle: '#06c' },
-        average: { strokeStyle: '#06c' }
+        average: { strokeStyle: '#06c' },
     };
 
     const bollingerBands = function (data) {
@@ -104,18 +104,18 @@ const data = dataGenerator(50);
 
 const xScale = d3
     .scaleTime()
-    .domain(fc.extentDate().accessors([d => d.date])(data));
+    .domain(fc.extentDate().accessors([(d) => d.date])(data));
 
 const yScale = d3.scaleLinear().domain(
     fc
         .extentLinear()
         .pad([0.4, 0.4])
-        .accessors([d => d.high, d => d.low])(data)
+        .accessors([(d) => d.high, (d) => d.low])(data),
 );
 
 // START
 // Create and apply the bollinger algorithm
-const bollingerAlgorithm = fc.indicatorBollingerBands().value(d => d.close);
+const bollingerAlgorithm = fc.indicatorBollingerBands().value((d) => d.close);
 const bollingerData = bollingerAlgorithm(data);
 const mergedData = data.map((d, i) => Object.assign({}, d, bollingerData[i]));
 
@@ -129,7 +129,7 @@ d3.select(container)
     .on('draw', () => {
         bollinger(mergedData);
     })
-    .on('measure', event => {
+    .on('measure', (event) => {
         const { width, height } = event.detail;
         xScale.range([0, width]);
         yScale.range([height, 0]);

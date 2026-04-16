@@ -16,8 +16,8 @@ const series = fc
     .xScale(xScale)
     .yScale(yScale)
     .crossValue((_, i) => i)
-    .mainValue(d => d)
-    .decorate(selection => {
+    .mainValue((d) => d)
+    .decorate((selection) => {
         selection.enter().style('fill', (_, i) => color(i));
     });
 
@@ -25,7 +25,7 @@ d3.select(container)
     .on('draw', () => {
         d3.select(container).select('svg').datum(data).call(series);
     })
-    .on('measure', event => {
+    .on('measure', (event) => {
         const { width, height } = event.detail;
         xScale.range([margin, width - margin]);
         yScale.range([height, 0]);
