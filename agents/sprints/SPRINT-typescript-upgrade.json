@@ -1,0 +1,18 @@
+{
+  "schema_version": "2.0",
+  "type": "sprint",
+  "milestone": "Build Infrastructure",
+  "sprint_name": "typescript-upgrade",
+  "repo": "defnotjec/d3fc",
+  "created": "2026-04-15",
+  "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+  "issues": [
+    {
+      "number": 19,
+      "title": "Upgrade TypeScript 4.9→5.x + tsd 0.28→0.33",
+      "branch": "fix/upgrade-typescript",
+      "status": "pending",
+      "story_points": 1
+    }
+  ]
+}

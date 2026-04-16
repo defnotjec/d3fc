@@ -1,0 +1,70 @@
+{
+  "issue": 45,
+  "title": "Crosshair centered on band scale bar series",
+  "sprint": "Annotations & Interaction",
+  "workflow": "wf: abbr",
+  "related_issues": [46, 47],
+  "upstream_related": "d3fc/d3fc#1764",
+  "scope": {
+    "in_scope": [
+      "CodePen: stacked bar crosshair centering (matches #1764 user scenario)",
+      "Repo example: examples/crosshair-band-center/ (SVG simple bars + crosshair)",
+      "Repo example: examples/crosshair-band-center-stacked/ (SVG stacked bars + crosshair)",
+      "Repo example: examples/crosshair-band-center-webgl/ (WebGL bars + SVG crosshair overlay)",
+      "Code comments documenting why WebGL crosshairs use SVG overlay pattern",
+      "Upstream comment on d3fc/d3fc#1764 with CodePen"
+    ],
+    "out_of_scope": [
+      "Changes to d3fc source code (xyBase.js, crosshair.js)",
+      "WebGL-native crosshair implementation (not needed — SVG overlay is the correct pattern)",
+      "Canvas crosshair variant (same .x() accessor pattern, SVG examples sufficient)"
+    ],
+    "uncertainties": []
+  },
+  "packages_affected": [],
+  "renderers": {
+    "svg": true,
+    "canvas": false,
+    "webgl": true
+  },
+  "acceptance_criteria": [
+    "Crosshair vertical line centers on bar (not left edge) for all three examples",
+    "CodePen demonstrates stacked bar centering matching #1764 scenario",
+    "WebGL example uses SVG overlay pattern with chartCartesian multi-plot-area",
+    "Code comments in WebGL example explain why crosshairs are SVG overlays by design",
+    "All examples follow d3fc conventions (30 bars, bandwidth 10, seedrandom, mockdate)",
+    "Changeset included per example PR",
+    "Screenshot tests included"
+  ],
+  "key_technique": "xScale(d.x) + xScale.bandwidth() / 2",
+  "deliverables": {
+    "codepen": {
+      "target": "stacked bars with centered crosshair",
+      "post_to": "d3fc/d3fc#1764"
+    },
+    "repo_examples": [
+      {
+        "issue": 45,
+        "directory": "examples/crosshair-band-center/",
+        "description": "SVG simple bars + centered crosshair on scaleBand"
+      },
+      {
+        "issue": 46,
+        "directory": "examples/crosshair-band-center-stacked/",
+        "description": "SVG stacked bars + centered crosshair on scaleBand"
+      },
+      {
+        "issue": 47,
+        "directory": "examples/crosshair-band-center-webgl/",
+        "description": "WebGL bars + SVG crosshair overlay, documenting overlay pattern"
+      }
+    ]
+  },
+  "phases": {
+    "outline": "complete",
+    "spec": "pending",
+    "implement": "pending",
+    "test": "pending",
+    "ship": "pending"
+  }
+}

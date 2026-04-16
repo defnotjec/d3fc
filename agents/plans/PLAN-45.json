@@ -1,0 +1,149 @@
+{
+  "issue": 45,
+  "related_issues": [46, 47],
+  "title": "Crosshair centered on band scale bar series",
+  "workflow": "wf: abbr",
+  "created": "2026-04-16",
+  "phases": [
+    {
+      "number": 1,
+      "name": "Simple bar + centered crosshair (#45)",
+      "branch": "fix/crosshair-band-center-example",
+      "steps": [
+        {
+          "description": "Create fix branch from upstream/master",
+          "command": "git checkout -b fix/crosshair-band-center-example upstream/master"
+        },
+        {
+          "description": "Create example directory and files",
+          "files": [
+            "examples/crosshair-band-center/index.html",
+            "examples/crosshair-band-center/index.js",
+            "examples/crosshair-band-center/README.md",
+            "examples/crosshair-band-center/__tests__/index.js"
+          ]
+        },
+        {
+          "description": "Create changeset",
+          "files": [".changeset/add-crosshair-band-center-example.md"]
+        },
+        {
+          "description": "Verify build and test pass"
+        }
+      ],
+      "implementation_notes": {
+        "pattern": "chartCartesian + seriesSvgBar + annotationSvgCrosshair",
+        "scale": "d3.scaleBand() for x-axis with categories",
+        "centering": "crosshair.x(d => xScale(d.x) + xScale.bandwidth() / 2)",
+        "interaction": "fc.pointer() on chart.decorate() to capture mouse events",
+        "snap": "Find nearest band category from mouse x position using d3.scaleBand().domain() + invert logic",
+        "data": "Simple categorical data, 8-10 categories for readability"
+      }
+    },
+    {
+      "number": 2,
+      "name": "Stacked bar + centered crosshair (#46)",
+      "branch": "fix/crosshair-band-center-stacked-example",
+      "steps": [
+        {
+          "description": "Create fix branch from upstream/master",
+          "command": "git checkout -b fix/crosshair-band-center-stacked-example upstream/master"
+        },
+        {
+          "description": "Create example directory and files",
+          "files": [
+            "examples/crosshair-band-center-stacked/index.html",
+            "examples/crosshair-band-center-stacked/index.js",
+            "examples/crosshair-band-center-stacked/README.md",
+            "examples/crosshair-band-center-stacked/__tests__/index.js"
+          ]
+        },
+        {
+          "description": "Create changeset",
+          "files": [".changeset/add-crosshair-band-center-stacked-example.md"]
+        },
+        {
+          "description": "Verify build and test pass"
+        }
+      ],
+      "implementation_notes": {
+        "pattern": "chartCartesian + seriesSvgRepeat(seriesSvgBar) + annotationSvgCrosshair",
+        "stacking": "d3.stack() to create stacked series data",
+        "centering": "Same bandwidth/2 technique as Phase 1",
+        "data": "Categorical data with 2-3 series for clear stacking visual"
+      }
+    },
+    {
+      "number": 3,
+      "name": "WebGL bar + SVG crosshair overlay (#47)",
+      "branch": "fix/crosshair-band-center-webgl-example",
+      "steps": [
+        {
+          "description": "Create fix branch from upstream/master",
+          "command": "git checkout -b fix/crosshair-band-center-webgl-example upstream/master"
+        },
+        {
+          "description": "Create example directory and files",
+          "files": [
+            "examples/crosshair-band-center-webgl/index.html",
+            "examples/crosshair-band-center-webgl/index.js",
+            "examples/crosshair-band-center-webgl/README.md",
+            "examples/crosshair-band-center-webgl/__tests__/index.js"
+          ]
+        },
+        {
+          "description": "Create changeset",
+          "files": [".changeset/add-crosshair-band-center-webgl-example.md"]
+        },
+        {
+          "description": "Verify build and test pass"
+        }
+      ],
+      "implementation_notes": {
+        "pattern": "chartCartesian + seriesWebglBar (webglPlotArea) + annotationSvgCrosshair (svgPlotArea)",
+        "overlay": "chartCartesian supports .webglPlotArea(bars).svgPlotArea(crosshair) simultaneously",
+        "centering": "Same bandwidth/2 technique",
+        "code_comments": "Document why crosshairs use SVG overlay: interactive/DOM-based, single instance, no GPU benefit, free label rendering",
+        "webgl_color": "fc.webglFillColor() for per-bar coloring"
+      }
+    },
+    {
+      "number": 4,
+      "name": "CodePen for upstream engagement",
+      "steps": [
+        {
+          "description": "Create CodePen using stacked bar pattern (matches d3fc/d3fc#1764 scenario)",
+          "notes": "Single CodePen, not multiple. Uses CodePen prefill API served locally."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "name": "Sprint test",
+      "steps": [
+        {
+          "description": "Merge all three fix branches into sprint test branch",
+          "command": "git checkout -b sprint/crosshair-band-center upstream/master && git merge fix/crosshair-band-center-example fix/crosshair-band-center-stacked-example fix/crosshair-band-center-webgl-example"
+        },
+        {
+          "description": "Build and serve for browser verification",
+          "command": "npm run bundle && npx serve . -p 8080"
+        },
+        {
+          "description": "Browser verify all three examples + crosshair snaps to center"
+        }
+      ]
+    }
+  ],
+  "commit_strategy": {
+    "per_phase": true,
+    "format": "feat(examples): add crosshair-band-center{-stacked,-webgl} example",
+    "author": "defnotjec <defnotjec@users.noreply.github.com>"
+  },
+  "test_strategy": {
+    "unit_tests": "None — examples only",
+    "screenshot_tests": "Standard __tests__/index.js per example",
+    "browser_verification": "Required — verify crosshair centers on bar, not left edge",
+    "determinism": "seedrandom + mockdate for consistent data, but crosshair position depends on mouse — screenshot test captures initial state only"
+  }
+}

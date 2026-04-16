@@ -1,0 +1,18 @@
+{
+  "schema_version": "2.0",
+  "type": "sprint",
+  "milestone": "Build Infrastructure",
+  "sprint_name": "markdownlint-upgrade",
+  "repo": "defnotjec/d3fc",
+  "created": "2026-04-15",
+  "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+  "issues": [
+    {
+      "number": 18,
+      "title": "Upgrade markdownlint 0.16→0.40 + markdownlint-cli 0.17→0.48",
+      "branch": "fix/upgrade-markdownlint",
+      "status": "pending",
+      "story_points": 3
+    }
+  ]
+}

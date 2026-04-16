@@ -1,0 +1,18 @@
+{
+  "schema_version": "2.0",
+  "type": "sprint",
+  "milestone": "Build Infrastructure",
+  "sprint_name": "prepr-override",
+  "repo": "defnotjec/d3fc",
+  "created": "2026-04-15",
+  "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+  "issues": [
+    {
+      "number": 17,
+      "title": "Eliminate expression-eval deprecation warning via prepr override",
+      "branch": "fix/prepr-override",
+      "status": "pending",
+      "story_points": 1
+    }
+  ]
+}

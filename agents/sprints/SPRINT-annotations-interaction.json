@@ -1,0 +1,51 @@
+{
+  "milestone": "Annotations & Interaction",
+  "created": "2026-04-16",
+  "issues": [
+    {
+      "number": 45,
+      "title": "Example: crosshair centered on band scale bar series",
+      "workflow": "wf: abbr",
+      "effort": "effort: simple",
+      "status": "outline",
+      "upstream_related": "d3fc/d3fc#1764",
+      "phases": {
+        "outline": "in_progress",
+        "spec": "pending",
+        "implement": "pending",
+        "test": "pending",
+        "ship": "pending"
+      }
+    },
+    {
+      "number": 46,
+      "title": "Example: crosshair centered on stacked band scale bars",
+      "workflow": "wf: abbr",
+      "effort": "effort: simple",
+      "status": "outline",
+      "upstream_related": "d3fc/d3fc#1764",
+      "phases": {
+        "outline": "in_progress",
+        "spec": "pending",
+        "implement": "pending",
+        "test": "pending",
+        "ship": "pending"
+      }
+    },
+    {
+      "number": 47,
+      "title": "Example: crosshair on WebGL bars via SVG overlay",
+      "workflow": "wf: abbr",
+      "effort": "effort: simple",
+      "status": "outline",
+      "upstream_related": "d3fc/d3fc#1764",
+      "phases": {
+        "outline": "in_progress",
+        "spec": "pending",
+        "implement": "pending",
+        "test": "pending",
+        "ship": "pending"
+      }
+    }
+  ]
+}
