@@ -83,7 +83,8 @@ export default [
         files: [
             '.commitlintrc.js',
             'babel.config.js',
-            'packages/d3fc/rollup.config.js'
+            'packages/d3fc/rollup.config.mjs',
+            'scripts/rollup.config.mjs'
         ],
         languageOptions: {
             globals: globals.node

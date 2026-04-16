@@ -1,15 +1,13 @@
-import { JSDOM, VirtualConsole } from 'jsdom';
+import {JSDOM, VirtualConsole} from 'jsdom';
 import fs from 'fs';
 
 describe('bundle', () => {
     it('should correctly wire-up all the dependencies via their UMD-exposed globals', (done) => {
-        const virtualConsole = new VirtualConsole().sendTo({
-            error: done,
+
+        const virtualConsole = new VirtualConsole().forwardTo({
+            error: done
         });
-        const dom = new JSDOM('<html></html>', {
-            virtualConsole,
-            runScripts: 'dangerously',
-        });
+        const dom = new JSDOM('<html></html>', { virtualConsole, runScripts: 'dangerously' },);
 
         const { window } = dom;
 
@@ -24,7 +22,7 @@ describe('bundle', () => {
             require.resolve('d3/dist/d3.js'),
             require.resolve('../../../node_modules/@d3fc/d3fc-data-join/build/d3fc-data-join.js'),
             require.resolve('../../../node_modules/@d3fc/d3fc-rebind/build/d3fc-rebind.js'),
-            require.resolve('../build/d3fc-axis.js'),
+            require.resolve('../build/d3fc-axis.js')
         ];
 
         scripts.forEach(loadScript);
@@ -38,5 +36,6 @@ describe('bundle', () => {
                 done(err);
             }
         };
-    });
+    }
+);
 });

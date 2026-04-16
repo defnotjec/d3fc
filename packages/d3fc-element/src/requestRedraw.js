@@ -25,7 +25,7 @@ const isDescendentOf = (element, ancestor) => {
         if (node.parentNode === ancestor) {
             return true;
         }
-        // eslint-disable-next-line no-cond-assign
+         
     } while ((node = node.parentNode));
     return false;
 };
