@@ -19,7 +19,7 @@ describe('bundle', () => {
         };
 
         const scripts = [
-            require.resolve('d3/dist/d3.js'),
+            require.resolve('d3').replace(/src\/index\.js$/, 'dist/d3.js'),
             require.resolve('../../../node_modules/@d3fc/d3fc-data-join/build/d3fc-data-join.js'),
             require.resolve('../../../node_modules/@d3fc/d3fc-rebind/build/d3fc-rebind.js'),
             require.resolve('../build/d3fc-axis.js')

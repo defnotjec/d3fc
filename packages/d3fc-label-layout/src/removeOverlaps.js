@@ -1,8 +1,9 @@
 import { rebindAll } from '@d3fc/d3fc-rebind';
-import { scan } from 'd3-array';
+import { leastIndex } from 'd3-array';
 import { collisionArea } from './util/collision';
 
-const scanForObject = (array, comparator) => array[scan(array, comparator)];
+const scanForObject = (array, comparator) =>
+    array[leastIndex(array, comparator)];
 
 export default (adaptedStrategy) => {
     adaptedStrategy = adaptedStrategy || ((x) => x);

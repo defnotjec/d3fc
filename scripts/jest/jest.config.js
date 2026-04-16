@@ -5,7 +5,9 @@ module.exports = {
     roots: ['<rootDir>/packages'],
     setupFiles: [require.resolve('./globals.js')],
     setupFilesAfterEnv: [require.resolve('./setup.js')],
-    moduleNameMapper: { '^d3-(.*)$': `d3-$1/dist/d3-$1` },
+    moduleNameMapper: {
+        '^d3-(.*)$': '<rootDir>/node_modules/d3-$1/dist/d3-$1.js',
+    },
     testMatch: ['**/test/**/*[sS]pec.js'],
     testEnvironment: 'jsdom',
     transform: { '\\.[jt]sx?$': 'babel-jest', '\\.mjs$': 'babel-jest' },
