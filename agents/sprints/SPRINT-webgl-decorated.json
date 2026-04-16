@@ -1,0 +1,30 @@
+{
+    "schema_version": "2.0",
+    "type": "sprint",
+    "milestone": "WebGL",
+    "sprint_name": "webgl-decorated",
+    "repo": "defnotjec/d3fc",
+    "created": "2026-04-16",
+    "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+    "issues": [
+        {
+            "number": 36,
+            "title": "Example: WebGL unified shader decoration (colors + uniforms + conditional hatching)",
+            "labels": {
+                "workflow": "wf: abbr",
+                "effort": "effort: moderate",
+                "priority": "pri: medium",
+                "type": "is: enhancement",
+                "flow": "flow: non-blocking"
+            },
+            "branch": "fix/webgl-decorated-example",
+            "status": "pending",
+            "dependencies": [33, 34, 35],
+            "story_points": 5
+        }
+    ],
+    "effort_summary": {
+        "total_points": 5,
+        "issues_count": 1
+    }
+}

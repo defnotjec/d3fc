@@ -1,0 +1,30 @@
+{
+    "schema_version": "2.0",
+    "type": "sprint",
+    "milestone": "WebGL",
+    "sprint_name": "webgl-conditional-shader",
+    "repo": "defnotjec/d3fc",
+    "created": "2026-04-16",
+    "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+    "issues": [
+        {
+            "number": 35,
+            "title": "Example: WebGL conditional fragment shading based on data state",
+            "labels": {
+                "workflow": "wf: abbr",
+                "effort": "effort: moderate",
+                "priority": "pri: medium",
+                "type": "is: enhancement",
+                "flow": "flow: non-blocking"
+            },
+            "branch": "fix/webgl-conditional-shader-example",
+            "status": "pending",
+            "dependencies": [],
+            "story_points": 3
+        }
+    ],
+    "effort_summary": {
+        "total_points": 3,
+        "issues_count": 1
+    }
+}
