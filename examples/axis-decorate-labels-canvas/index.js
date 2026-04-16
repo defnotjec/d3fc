@@ -70,17 +70,21 @@ var chart = fc
                 return d;
             });
 
-        // Now measure text and size the badge rect to fit
+        // Measure text and size the badge rect to fit.
+        // getBBox() doesn't account for the dy="0.71em" offset that
+        // axisBottom applies to tick labels, so we add it manually.
         s.each(function(d) {
             var g = d3.select(this);
             var text = g.select('text').node();
             if (!text) return;
             var bbox = text.getBBox();
+            var fontSize = parseFloat(getComputedStyle(text).fontSize);
+            var dyOffset = fontSize * 0.71;
             var padX = 12;
             var padY = 6;
             g.select('.label-bg')
                 .attr('x', bbox.x - padX / 2)
-                .attr('y', bbox.y - padY / 2)
+                .attr('y', bbox.y + dyOffset - padY / 2)
                 .attr('width', bbox.width + padX)
                 .attr('height', bbox.height + padY);
         });
