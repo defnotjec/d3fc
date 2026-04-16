@@ -1,24 +1,41 @@
-// Custom per-tick axis label styling via decorate.
+// Axis label badge decoration on an SVG bar chart via chartCartesian.
 //
 // Demonstrates:
-// - Conditionally styling individual tick labels with badge backgrounds
-// - Appending SVG elements (rect, text) to tick groups via .decorate()
-// - Multiple visual states: highlighted (blue badge), flagged (gold badge), plain
+// - Using .xDecorate() on chartCartesian to style individual tick labels
+// - Badge backgrounds and conditional text styling on specific ticks
+// - SVG plot area with the same decoration pattern as Canvas and WebGL
 
-var container = document.querySelector('d3fc-svg');
-var margin = 10;
+var data = fc.randomGeometricBrownianMotion().steps(30)(1);
+
+var xScale = d3
+    .scaleLinear()
+    .domain([0, data.length - 1]);
+
+var yScale = d3
+    .scaleLinear()
+    .domain(fc.extentLinear()(data));
 
 // Define which ticks get special treatment
-var highlighted = [44]; // blue badge
-var flagged = [60]; // gold badge with flag marker
+var highlighted = [10]; // blue badge
+var flagged = [20]; // gold badge with flag marker
 
-var scale = d3
-    .scaleLinear()
-    .domain([40, 70]);
-
-var axis = fc.axisBottom(scale)
-    .tickValues([44, 50, 55, 60, 65])
+var bar = fc
+    .seriesSvgBar()
+    .bandwidth(10)
+    .crossValue(function(_, i) { return i; })
+    .mainValue(function(d) { return d; })
     .decorate(function(s) {
+        s.enter()
+            .select('path')
+            .attr('fill', function(d) {
+                return d > 1 ? '#2164C2' : '#D6591C';
+            });
+    });
+
+var chart = fc
+    .chartCartesian(xScale, yScale)
+    .svgPlotArea(bar)
+    .xDecorate(function(s) {
         // On enter, insert a rect behind the text for badge backgrounds
         s.enter()
             .insert('rect', 'text')
@@ -57,33 +74,26 @@ var axis = fc.axisBottom(scale)
                 return d;
             });
 
-        // Now measure text and size the badge rect to fit
+        // Measure text and size the badge rect to fit.
+        // getBBox() doesn't account for the dy="0.71em" offset that
+        // axisBottom applies to tick labels, so we add it manually.
         s.each(function(d) {
             var g = d3.select(this);
             var text = g.select('text').node();
             if (!text) return;
             var bbox = text.getBBox();
+            var fontSize = parseFloat(getComputedStyle(text).fontSize);
+            var dyOffset = fontSize * 0.71;
             var padX = 12;
             var padY = 6;
             g.select('.label-bg')
                 .attr('x', bbox.x - padX / 2)
-                .attr('y', bbox.y - padY / 2)
+                .attr('y', bbox.y + dyOffset - padY / 2)
                 .attr('width', bbox.width + padX)
                 .attr('height', bbox.height + padY);
         });
     });
 
-d3.select(container)
-    .on('draw', function() {
-        d3.select(container)
-            .select('svg')
-            .append('g')
-            .attr('transform', 'translate(0, 10)')
-            .call(axis);
-    })
-    .on('measure', function(event) {
-        var width = event.detail.width;
-        scale.range([margin + 40, width - margin - 40]);
-    });
-
-container.requestRedraw();
+d3.select('#chart')
+    .datum(data)
+    .call(chart);
