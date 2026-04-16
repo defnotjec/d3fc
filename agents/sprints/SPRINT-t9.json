@@ -1,0 +1,11 @@
+{
+  "schema_version": "2.0",
+  "type": "sprint",
+  "milestone": "Build Infrastructure",
+  "sprint_name": "t9-bump-babel-preset-env",
+  "repo": "defnotjec/d3fc",
+  "created": "2026-04-15",
+  "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+  "issues": [{"number": 9, "title": "T3: Bump @babel/preset-env to latest ^7", "branch": "fix/bump-babel-preset-env", "status": "pending", "story_points": 1}],
+  "effort_summary": {"total_points": 1, "issues_count": 1}
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "2.0",
+  "type": "sprint",
+  "milestone": "Build Infrastructure",
+  "sprint_name": "t7-remove-babelrc-rollup",
+  "repo": "defnotjec/d3fc",
+  "created": "2026-04-15",
+  "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+  "issues": [{"number": 7, "title": "T1: Remove dead babelrc-rollup dependency", "branch": "fix/remove-babelrc-rollup", "status": "pending", "story_points": 1}],
+  "effort_summary": {"total_points": 1, "issues_count": 1}
+}
