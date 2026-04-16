@@ -1,0 +1,30 @@
+{
+    "schema_version": "2.0",
+    "type": "sprint",
+    "milestone": "Axis Rendering",
+    "sprint_name": "axis-decorate-canvas",
+    "repo": "defnotjec/d3fc",
+    "created": "2026-04-16",
+    "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+    "issues": [
+        {
+            "number": 39,
+            "title": "Example: Canvas area chart with decorated SVG axis labels via chartCartesian",
+            "labels": {
+                "workflow": "wf: abbr",
+                "effort": "effort: moderate",
+                "priority": "pri: medium",
+                "type": "is: enhancement",
+                "flow": "flow: non-blocking"
+            },
+            "branch": "fix/chart-cartesian-canvas-decorated-axis",
+            "status": "pending",
+            "dependencies": [],
+            "story_points": 3
+        }
+    ],
+    "effort_summary": {
+        "total_points": 3,
+        "issues_count": 1
+    }
+}
