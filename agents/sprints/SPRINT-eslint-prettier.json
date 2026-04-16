@@ -1,0 +1,30 @@
+{
+    "schema_version": "2.0",
+    "type": "sprint",
+    "milestone": "Build Infrastructure",
+    "sprint_name": "eslint-prettier",
+    "repo": "defnotjec/d3fc",
+    "created": "2026-04-16",
+    "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+    "issues": [
+        {
+            "number": 28,
+            "title": "Upgrade ESLint 7→9 + Prettier 1→3 (config migration, pinned defaults)",
+            "labels": {
+                "workflow": "wf: abbr",
+                "effort": "effort: complex",
+                "priority": "pri: medium",
+                "type": "is: chore",
+                "flow": "flow: non-blocking"
+            },
+            "branch": "fix/eslint-9-prettier-3",
+            "status": "pending",
+            "dependencies": [],
+            "story_points": 8
+        }
+    ],
+    "effort_summary": {
+        "total_points": 8,
+        "issues_count": 1
+    }
+}

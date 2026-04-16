@@ -1,0 +1,30 @@
+{
+    "schema_version": "2.0",
+    "type": "sprint",
+    "milestone": "Build Infrastructure",
+    "sprint_name": "prettier-reformat",
+    "repo": "defnotjec/d3fc",
+    "created": "2026-04-16",
+    "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+    "issues": [
+        {
+            "number": 29,
+            "title": "Adopt Prettier 3 modern formatting defaults (one-time reformat)",
+            "labels": {
+                "workflow": "wf: direct",
+                "effort": "effort: simple",
+                "priority": "pri: low",
+                "type": "is: chore",
+                "flow": "flow: non-blocking"
+            },
+            "branch": "fix/prettier-reformat",
+            "status": "pending",
+            "dependencies": [28],
+            "story_points": 2
+        }
+    ],
+    "effort_summary": {
+        "total_points": 2,
+        "issues_count": 1
+    }
+}

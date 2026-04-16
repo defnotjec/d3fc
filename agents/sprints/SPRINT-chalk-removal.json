@@ -1,0 +1,30 @@
+{
+    "schema_version": "2.0",
+    "type": "sprint",
+    "milestone": "Build Infrastructure",
+    "sprint_name": "chalk-removal",
+    "repo": "defnotjec/d3fc",
+    "created": "2026-04-16",
+    "topology": "fix/* → upstream/master (direct PR to d3fc/d3fc)",
+    "issues": [
+        {
+            "number": 26,
+            "title": "Remove dead chalk dependency and unused commit-notice script",
+            "labels": {
+                "workflow": "wf: direct",
+                "effort": "effort: trivial",
+                "priority": "pri: low",
+                "type": "is: chore",
+                "flow": "flow: non-blocking"
+            },
+            "branch": "fix/remove-chalk",
+            "status": "pending",
+            "dependencies": [],
+            "story_points": 1
+        }
+    ],
+    "effort_summary": {
+        "total_points": 1,
+        "issues_count": 1
+    }
+}
