@@ -62,27 +62,28 @@ var chart = fc
                 return 'normal';
             });
 
-        // After text renders, size the badge rect to fit the text
+        // Set final text content BEFORE measuring — flag marker must be
+        // included in the bbox so the badge rect covers the full label
+        s.select('text')
+            .text(function(d) {
+                if (flagged.indexOf(d) !== -1) return d + ' \u2691';
+                return d;
+            });
+
+        // Now measure text and size the badge rect to fit
         s.each(function(d) {
             var g = d3.select(this);
             var text = g.select('text').node();
             if (!text) return;
             var bbox = text.getBBox();
-            var padX = 8;
-            var padY = 4;
+            var padX = 12;
+            var padY = 6;
             g.select('.label-bg')
                 .attr('x', bbox.x - padX / 2)
                 .attr('y', bbox.y - padY / 2)
                 .attr('width', bbox.width + padX)
                 .attr('height', bbox.height + padY);
         });
-
-        // Add a flag marker after the text for flagged ticks
-        s.select('text')
-            .text(function(d) {
-                if (flagged.indexOf(d) !== -1) return d + ' \u2691';
-                return d;
-            });
     });
 
 d3.select('#chart')
