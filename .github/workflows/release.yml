@@ -3,6 +3,7 @@ name: Release
 on:
   push:
     branches:
+      - "d3fc-v6-production"
       - "d3fc-v6-latest"
       - "d3fc-v7-latest"
 
