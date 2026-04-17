@@ -28,21 +28,34 @@ If upstream doesn't adopt our changes, we need the ability to independently buil
 
 ### Branch topology
 
-Adopt a four-branch release topology with version separation and staging gates:
+Adopt a five-branch release topology with version separation and staging/production gates:
 
 ```
 upstream/master (read-only)
     │
-    ├── d3fc-v6-latest    ← production: upstream master + accepted fixes
-    │     └── d3fc-v6-staging  ← integration testing before promotion
+    ├── d3fc-v6-production  ← release-ready: promotion triggers master update
+    │     └── d3fc-v6-latest   ← accepted fixes, changelog generation
+    │           └── d3fc-v6-staging  ← integration testing before promotion
     │
-    ├── d3fc-v7-latest    ← production: full infrastructure + D3 v7
+    ├── d3fc-v7-latest    ← continuous iteration: infrastructure + D3 v7
     │     └── d3fc-v7-staging  ← integration testing before promotion
     │
     ├── fix/*             ← upstream PR branches (from upstream/master)
     │
     └── internal/workflow ← CLAUDE.md, agents/, .claude/ (never released)
 ```
+
+### v6 promotion flow
+
+```
+fix/* → d3fc-v6-staging → d3fc-v6-latest → d3fc-v6-production
+```
+
+Promotion to `d3fc-v6-production` represents a release-ready state and should trigger an update to `origin/master` (the fork's default branch), keeping it in sync with our production baseline.
+
+### v7 strategy
+
+v7 tracks as continuous `staging → latest` iteration. No production branch yet — v7 includes the full infrastructure modernization stack (Node 20.19, Jest 30, Rollup 4, ESLint 9, Prettier 3, D3 v7) which is a significant departure. If upstream remains inactive and we take over primary maintenance, v7 eventually becomes the production branch and v6 support is evaluated for deprecation.
 
 ### CI replication
 
@@ -64,19 +77,20 @@ Two GitHub Actions workflows adapted from upstream:
 ```
 fix/* branches ──► *-staging (CI required, review optional)
 *-staging      ──► *-latest (CI required, promotion after integration pass)
+v6-latest      ──► v6-production (CI required, triggers master update)
 internal/workflow   never merges into release branches
 ```
 
 ### Branch protection
 
-All four release branches are protected:
+All five release branches are protected:
 
-| Rule | `*-staging` | `*-latest` |
-|------|-------------|------------|
-| Require status checks (CI) | ✅ | ✅ |
-| Require PR (no direct push) | ✅ | ✅ |
-| Restrict force push | ✅ | ✅ |
-| Require linear history | — | ✅ |
+| Rule | `*-staging` | `*-latest` | `v6-production` |
+|------|-------------|------------|-----------------|
+| Require status checks (CI) | ✅ | ✅ | ✅ |
+| Require PR (no direct push) | ✅ | ✅ | ✅ |
+| Restrict force push | ✅ | ✅ | ✅ |
+| Require linear history | — | ✅ | ✅ |
 
 `internal/workflow` remains unprotected.
 
